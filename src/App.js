@@ -1,21 +1,15 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import SearchMovies from "./components/SearchMovies";
 import "./App.css";
 
 function App() {
-  const [date, setDate] = useState(null);
-  useEffect(() => {
-    async function getDate() {
-      const res = await fetch("/api/date");
-      const newDate = await res.text();
-      setDate(newDate);
-    }
-    getDate();
-  }, []);
   return (
-    <main>
-      <h1>Bonjour toi</h1>
-    </main>
+    <div className="container">
+      <main>
+        <h1 className="title">React Movie Search</h1>
+        <SearchMovies />
+      </main>
+    </div>
   );
 }
 
