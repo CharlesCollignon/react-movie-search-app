@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import MovieCard from "./MovieCard";
 
 export default function SearchMovies() {
   // state input query - movies
@@ -16,7 +17,6 @@ export default function SearchMovies() {
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data.results);
       setMovies(data.results);
     } catch (err) {
       console.log(err);
@@ -43,21 +43,7 @@ export default function SearchMovies() {
         {movies
           .filter((movie) => movie.poster_path)
           .map((movie) => (
-            <div className="card" key={movie.id}>
-              <img
-                className="card--image"
-                src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`}
-                alt={movie.title + "poster"}
-              />
-              <div className="card--content">
-                <h3 className="card--title">{movie.title}</h3>
-                <p>
-                  <small>{movie.release_date}</small>
-                </p>
-                <p>{movie.vote_average}</p>
-                <p className="card--description">{movie.overview}</p>
-              </div>
-            </div>
+            <MovieCard movie={movie} key={movie.id} />
           ))}
       </div>
     </>
